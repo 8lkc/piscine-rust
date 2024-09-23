@@ -1,6 +1,8 @@
 <h1 align="center">🦀 piscine 🚀</h1>
 
+- ## Test before submitting
+
 ```
 go install github.com/Bakarseck/jump@latest
-jump test nom_exo
+jump test <NAME_EXO>
 ```
