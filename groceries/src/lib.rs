@@ -13,7 +13,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let mut groceries = vec![
+        let groceries = vec![
             "yogurt".to_string(),
             "panettone".to_string(),
             "bread".to_string(),
