@@ -16,10 +16,8 @@ pub fn title_case(input: &str) -> String {
 
 pub fn change_case(input: &str) -> String {
     input.chars().map(|c| {
-        if c.is_ascii_uppercase() {
-            c.to_ascii_lowercase()
-        } else {
-        c.to_ascii_uppercase()}
+        if c.is_ascii_uppercase() {c.to_ascii_lowercase()}
+        else {c.to_ascii_uppercase()}
     }).collect()
 }
 
