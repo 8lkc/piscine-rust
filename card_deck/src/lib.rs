@@ -42,6 +42,6 @@ impl Suit {
 }
 
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct Card {pub suit: Suit, pub rank: Rank}
 pub fn winner_card(card: &Card) -> bool {card.rank == Rank::Ace && card.suit == Suit::Spade}
