@@ -10,33 +10,24 @@ impl CipherError {
     }
 }
 
+pub fn atbash_cipher(input: &str) -> String {
+    input.chars().map(|c| {
+        if c.is_ascii_alphabetic() {
+            let a = if c.is_ascii_uppercase() { 'A' } else { 'a' };
+            let z = if c.is_ascii_uppercase() { 'Z' } else { 'z' };
+            let mirrored_char = (z as u8) + (a as u8) - (c as u8);
+            mirrored_char as char
+        } else {
+            c
+        }
+    }).collect()
+}
+
 pub fn cipher(original: &str, ciphered: &str) -> Option<Result<bool, CipherError>> {
-    // Return None if the original string is empty
-    if original.is_empty() {
-        return None; // Early return for empty original string
-    }
-
-    // Generate the expected Atbash cipher for the original string
-    let expected_cipher: String = original
-        .chars()
-        .map(|c| {
-            // Check if character is an uppercase letter
-            if c.is_ascii_uppercase() {
-                (b'Z' - (c as u8 - b'A')) as char
-            // Check if character is a lowercase letter
-            } else if c.is_ascii_lowercase() {
-                (b'z' - (c as u8 - b'a')) as char
-            // Return non-alphabetic characters unchanged
-            } else {
-                c
-            }
-        })
-        .collect();
-
-    // Compare the expected cipher with the provided cipher
-    if expected_cipher == ciphered {
-        Some(Ok(true)) // Return true if they match
+    let expected = atbash_cipher(original);
+    if expected == ciphered {
+        Some(Ok(true))
     } else {
-        Some(Err(CipherError::new(false, expected_cipher))) // Return error with the expected cipher
+        Some(Err(CipherError::new(false, expected)))
     }
 }
