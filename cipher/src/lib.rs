@@ -6,14 +6,12 @@ impl CipherError {
 }
 
 pub fn cipher(original: &str, ciphered: &str) -> Option<Result<bool, CipherError>> {
-    if original.is_empty() {return None;}
-    else {
-        let expected_cipher: String = original.chars().map(|c| {
-            if c.is_ascii_uppercase() {(b'Z' - (c as u8 - b'A')) as char}
-            else if c.is_ascii_lowercase() {(b'z' - (c as u8 - b'a')) as char}
-            else {c}
-        }).collect();
-        if expected_cipher == ciphered {Some(Ok(true))}
-        else {Some(Err(CipherError::new(false, expected_cipher)))}
-    }
+    if original.is_empty() || ciphered.is_empty() {return None}
+    let expected_cipher: String = original.chars().map(|c| {
+        if c.is_ascii_uppercase() {(b'Z' - (c as u8 - b'A')) as char}
+        else if c.is_ascii_lowercase() {(b'z' - (c as u8 - b'a')) as char}
+        else {c}
+    }).collect();
+    if expected_cipher == ciphered {Some(Ok(true))}
+    else {Some(Err(CipherError::new(false, expected_cipher)))}
 }
