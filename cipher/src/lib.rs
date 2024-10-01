@@ -13,7 +13,7 @@ impl CipherError {
 pub fn cipher(original: &str, ciphered: &str) -> Option<Result<bool, CipherError>> {
     // Return None if the original string is empty
     if original.is_empty() {
-        return None; // Return None if original is empty
+        return None; // Early return for empty original string
     }
 
     // Generate the expected Atbash cipher for the original string
