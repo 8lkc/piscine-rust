@@ -1,5 +1,4 @@
-use middle_day::middle_day;
-use chrono::Weekday as wd;
+use middle_day::*;
 
 fn main() {
     assert_eq!(wd::Mon, middle_day(2019).unwrap());
