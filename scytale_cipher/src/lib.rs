@@ -3,9 +3,7 @@ pub fn scytale_cipher(message: String, i: u32) -> String {
     let chunks = split_into_chunks(message, i as usize);
     let number_of_chunks = chunks.len();
     for j in 0..i as usize {
-        for i in 0..number_of_chunks {
-            result.push(chunks[i][j])
-        }
+        for i in 0..number_of_chunks {result.push(chunks[i][j])}
     }
     result.trim().to_string()
 }
