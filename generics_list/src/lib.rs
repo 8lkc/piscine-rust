@@ -9,28 +9,21 @@ pub struct Node<T> {
     pub next: Option<Box<Node<T>>>,
 }
 
-impl<T:std::fmt::Debug> List<T> {
+impl<T> List<T> {
     pub fn new() -> List<T> {List {head: None}}
 
     pub fn len(&self) -> usize {
         let mut length = 0;
         let mut current = self.head.as_ref();
-        while let Some(node) = current {
-            length += 1;
-            current = node.next.as_deref();
-        }
+        while let Some(node) = current {length += 1; current = node.next.as_deref()}
         length
     }
 
     pub fn pop(&mut self) {
-        let mut current = self.head.as_ref();
-        let mut prev = current;
-        while let Some(node) = current {
-            println!("NEXT -> {:#?}", node);
-            prev = current;
-            current = node.next.as_deref();
-        }
-        println!("PREV -> {:#?}", prev);
+        if self.head.is_none() {return}
+        let mut current = self.head.take();
+        if let Some(node) = current {current = if !node.next.is_none() {Some(*node.next.unwrap())} else {None}}
+        self.head = current.take();
     }
 
     pub fn push(&mut self, value:T) {
